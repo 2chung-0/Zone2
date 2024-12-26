@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zone2</title>
     <style>
-        /* 기존 스타일 유지 */
         @font-face {
             font-family: 'YUniverse';
             src: url('글꼴/YUniverse-B.otf') format('opentype');
@@ -31,20 +30,16 @@
             background-color: #000000;
             width: 100vw;
             height: 100vh;
-            display: flex;
-            justify-content: center;
             overflow: hidden;
         }
 
         .container {
-
-            font-size: 30px;
+            font-size: 50px;
             height: 100vh;
-            
             display: flex;
             flex-direction: column;
             align-items: center;
-            width:  1080px;
+            width: 100vw;
             overflow: hidden;
             padding: 120px;
             color: white;
@@ -55,7 +50,7 @@
 
         .title {
             font-family: 'YUniverse', sans-serif;
-            font-size: 60px;
+            font-size: 90px;
             margin-bottom: 80px;
         }
 
@@ -66,7 +61,7 @@
         }
 
         .timeline-image {
-            width: 110%;
+            width: 100%;
             height: auto;
             object-fit: contain;
             object-position: center;
@@ -103,7 +98,7 @@
     <script>
         // 클라이언트 ID와 사용자 매핑
         const clientMapping = {
-            'c6b8': 4, // 정임숙
+            'c6b8': 1, // 정임숙님을 우은빈님으로 변경
             '4de9': 1, // 우은빈
             '7e0e': 3, // 임유빈
             '3af9': 2  // 이애자
@@ -115,7 +110,7 @@
             const currentTitle = title.textContent;
             const currentVersion = currentTitle.includes('우은빈') ? 1 : 
                                  currentTitle.includes('이애자') ? 2 :
-                                 currentTitle.includes('임유빈') ? 3 : 4;
+                                 currentTitle.includes('임유빈') ? 3 : 1; // 정임숙님을 우은빈님으로 변경
             
             if (currentVersion === version) return;
 
@@ -137,7 +132,7 @@
                         </div>`;
                 } else if (version === 2) {
                     title.textContent = '이애자의 이야기';
-                    textSection.innerHTML = '이애자는 1942년 서울에서 7남매 중 장녀로 태어났다. 직장생활하다 1968년도에 포항 출신 공무원 김석구와 결혼하여 세 자녀를 키우며 가정을 꾸린 것을 자신의 삶에서 가장 큰 업적으로 여긴다. 아들이 유학 갈 때 남겨 놓은 통기타로 우연히 시작한 양천어르신종합복지관 시니어 통기타반에서 20년이 넘게 활동하며 80세가 넘도록 봉사 활동을 이어나갔다. 동양화 그리기와 한국 무용을 오랫동안 취미로 즐겼다.';
+                    textSection.innerHTML = '이애자님은 서울에서 7남매 중 장녀로 태어나셨습니다. 젊은 시절, 유명한 디자이너 앙드레 김과 함께 의상을 배우며 의상실을 운영하셨습니다. 이애자님은 세 자녀를 키우며 가정을 꾸리는 것을 자신의 삶에서 가장 큰 업적으로 여기십니다. 또한, 아들이 유학을 간 후 남겨진 통기타를 계기로 시니어 통기타반에서 반장으로 활동하며 20년간 봉사하셨고, 80세가 넘도록 활동을 이어가셨습니다. 이애자님은 동양화와 한국 무용을 오랫동안 취미로 즐기셨습니다.';
                     timelineImage.src = '이애자/zone2_timeline_0.svg';
                     endingSection.innerHTML = `
                         <div class="endText">
@@ -151,56 +146,82 @@
                         <div class="endText">
                             [The Life Gallery: 임유빈전]을 통해 그동안의 순간들을 되돌아보며, 앞으로 펼쳐질 그의 미래를 함께 응원하고자 합니다. 이곳에 모인 우리의 마음이 그의 앞날에 든든한 날개가 되어주길 바랍니다.
                         </div>`;
-                } else if (version === 4) {
-                    title.textContent = '정임숙의 이야기';
-                    textSection.innerHTML = '정임숙 님은 1973년 서울에서 태어났습니다. 가족으로는 엄마와 두 오빠, 한 여동생이 있으며, 아내이자 엄마로서 가족을 돌보는 중요한 역할을 하고 있습니다. 2016년부터 약국에서 파트타이머로 일하고 있습니다. 삶에서 큰 자부심을 가지고 있는 것은 가족을 돌보는 역할입니다. 취미로는 산책을 즐기며, 좋아하는 음식은 잡채이고, 발라드 음악을 즐겨 듣습니다.';
-                    timelineImage.src = '정임숙/zone2_timeline_0.svg';
-                    endingSection.innerHTML = `
-                        <div class="endText">
-                            [The Life Gallery: 정임숙전]을 통해 우리는 평범하지만 특별한 한 여인의 삶을 만납니다. 가족을 향한 사랑으로 빛나는 그녀의 일상이 더욱 풍요롭고 행복하기를 기원합니다. 앞으로도 그녀의 따뜻한 마음이 더 많은 이들에게 전해지길 바랍니다.
-                        </div>`;
                 }
                 container.style.opacity = 1;
             }, 800);
         }
 
-        // WebSocket 연결 설정
-        const ws = new WebSocket("wss://ws.thelifegalleryvideo.com");
+        let ws;
+let reconnectInterval;
+const RECONNECT_INTERVAL = 60000; // 1분
+
+function connectWebSocket() {
+    // 이미 연결이 있고 정상 상태라면 재연결하지 않음
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        console.log("WebSocket이 이미 연결되어 있습니다");
+        return;
+    }
+
+    ws = new WebSocket("wss://ws.thelifegalleryvideo.com");
+    
+    ws.onopen = () => {
+        console.log("WebSocket 연결됨");
+        // 재연결 인터벌이 설정되어 있다면 제거
+        if (reconnectInterval) {
+            clearInterval(reconnectInterval);
+            reconnectInterval = null;
+        }
         
-        ws.onopen = () => {
-            console.log("WebSocket 연결됨");
-            // 현재 클라이언트의 ID를 확인하고 해당하는 버전으로 업데이트
-            const currentClientId = window.location.hash.substring(1) || 'default';
-            const version = clientMapping[currentClientId] || 1;
-            
-            ws.send(JSON.stringify({
-                action: "setId",
-                clientId: currentClientId
-            }));
-            
-            updatePage(version);
-        };
+        const currentClientId = window.location.hash.substring(1) || 'default';
+        const version = clientMapping[currentClientId] || 1;
+        
+        ws.send(JSON.stringify({
+            action: "setId",
+            clientId: currentClientId
+        }));
+        
+        updatePage(version);
+    };
 
-        ws.onclose = () => {
-            console.log("WebSocket 연결이 종료되었습니다");
-        };
+    ws.onclose = () => {
+        console.log("WebSocket 연결이 종료되었습니다");
+        // 연결이 끊어지면 재연결 인터벌 설정
+        if (!reconnectInterval) {
+            reconnectInterval = setInterval(() => {
+                console.log("WebSocket 재연결 시도...");
+                connectWebSocket();
+            }, RECONNECT_INTERVAL);
+        }
+    };
 
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            //console.log("서버로부터 수신:", data);
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
 
-            if (data.action === "sync" && data.currentSelection.clientId) {
-                const version = clientMapping[data.currentSelection.clientId];
-                if (version) {
-                    updatePage(version);
-                }
+        if (data.action === "sync" && data.currentSelection.clientId) {
+            const version = clientMapping[data.currentSelection.clientId];
+            if (version) {
+                updatePage(version);
             }
-        };
+        }
+    };
 
-        ws.onerror = (error) => {
-            console.error("WebSocket 에러:", error);
-        };
+    ws.onerror = (error) => {
+        console.error("WebSocket 에러:", error);
+    };
+}
 
+// 초기 WebSocket 연결 시작
+connectWebSocket();
+
+// 페이지 언로드 시 정리
+window.addEventListener('beforeunload', () => {
+    if (reconnectInterval) {
+        clearInterval(reconnectInterval);
+    }
+    if (ws) {
+        ws.close();
+    }
+});
         // 시간 기반 업데이트를 위한 함수
         function getCurrentScheduledVersion() {
             const now = new Date();
@@ -212,15 +233,15 @@
                 { start: 1200, end: 1230, version: 1 },
                 { start: 1230, end: 1300, version: 2 },
                 { start: 1300, end: 1330, version: 3 },
-                { start: 1330, end: 1400, version: 4 },
+                { start: 1330, end: 1400, version: 1 }, // 정임숙님 시간대를 우은빈님으로 변경
                 { start: 1400, end: 1430, version: 1 },
                 { start: 1430, end: 1500, version: 2 },
                 { start: 1500, end: 1530, version: 3 },
-                { start: 1530, end: 1600, version: 4 },
+                { start: 1530, end: 1600, version: 1 }, // 정임숙님 시간대를 우은빈님으로 변경
                 { start: 1600, end: 1630, version: 1 },
                 { start: 1630, end: 1700, version: 2 },
                 { start: 1700, end: 1730, version: 3 },
-                { start: 1730, end: 1800, version: 4 },
+                { start: 1730, end: 1800, version: 1 }, // 정임숙님 시간대를 우은빈님으로 변경
                 { start: 1800, end: 1830, version: 1 },
                 { start: 1830, end: 1900, version: 2 }
             ];
