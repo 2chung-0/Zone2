@@ -1,0 +1,124 @@
+relationshipData = {
+    "relationship": [
+        {
+            "id": 1734247393788,
+            "name": "전순례",
+            "relation": "어머니",
+            "photo": "blob:http://localhost:3000/7e4e82f6-113e-4ebe-af71-ec4dc9dc6b31",
+            "file": [
+                {
+                    "url": "blob:http://localhost:3000/7274d4b9-ea8b-4ba0-a058-223b60f064f2",
+                    "type": "image/jpeg",
+                    "original": {}
+                }
+            ],
+            "thumbnail": {
+                "url": "blob:http://localhost:3000/7274d4b9-ea8b-4ba0-a058-223b60f064f2",
+                "type": "image/jpeg",
+                "original": {}
+            },
+            "thumbnailIdx": 0,
+            "extension": ["jpg"]
+        },
+        {
+            "id": 1734247420922,
+            "name": "소희언니",
+            "relation": "새언니",
+            "photo": "blob:http://localhost:3000/305f2ad7-be2b-47cf-affb-c18ee15a9c84",
+            "file": [
+                {
+                    "url": "blob:http://localhost:3000/248d2c20-cb69-4ec6-8f3b-05c57e2558d4",
+                    "type": "image/jpeg",
+                    "original": {}
+                }
+            ],
+            "thumbnail": {
+                "url": "blob:http://localhost:3000/248d2c20-cb69-4ec6-8f3b-05c57e2558d4",
+                "type": "image/jpeg",
+                "original": {}
+            },
+            "thumbnailIdx": 0,
+            "extension": ["jpg"]
+        },
+        {
+            "id": 1734247456321,
+            "name": "우형주",
+            "relation": "친오빠",
+            "photo": "blob:http://localhost:3000/4c0d4120-b7f3-44ac-8710-aa52eaadefe6",
+            "file": [
+                {
+                    "url": "blob:http://localhost:3000/45152d2a-fdbf-42f7-a94e-6324ba921886",
+                    "type": "image/jpeg",
+                    "original": {}
+                }
+            ],
+            "thumbnail": {
+                "url": "blob:http://localhost:3000/45152d2a-fdbf-42f7-a94e-6324ba921886",
+                "type": "image/jpeg",
+                "original": {}
+            },
+            "thumbnailIdx": 0,
+            "extension": ["jpg"]
+        },
+        {
+            "id": 1734247601186,
+            "name": "우하균",
+            "relation": "아버지",
+            "photo": "blob:http://localhost:3000/b896d099-0931-4aae-9840-66d4900a82f5",
+            "file": [
+                {
+                    "url": "blob:http://localhost:3000/9bc96e1f-1978-4d6f-8e2c-1f2ab9b7622f",
+                    "type": "image/png",
+                    "original": {}
+                }
+            ],
+            "thumbnail": {
+                "url": "blob:http://localhost:3000/9bc96e1f-1978-4d6f-8e2c-1f2ab9b7622f",
+                "type": "image/png",
+                "original": {}
+            },
+            "thumbnailIdx": 0,
+            "extension": ["png"]
+        },
+        {
+            "id": 1734247620635,
+            "name": "승무원 동기",
+            "relation": "친구",
+            "photo": "blob:http://localhost:3000/48d6e7ca-4049-4927-96cd-6cd0ae50cf8c",
+            "file": [
+                {
+                    "url": "blob:http://localhost:3000/4a2fb344-9141-4b22-9df5-5a4297721ce3",
+                    "type": "image/jpeg",
+                    "original": {}
+                }
+            ],
+            "thumbnail": {
+                "url": "blob:http://localhost:3000/4a2fb344-9141-4b22-9df5-5a4297721ce3",
+                "type": "image/jpeg",
+                "original": {}
+            },
+            "thumbnailIdx": 0,
+            "extension": ["jpg"]
+        },
+        {
+            "id": 1734247662951,
+            "name": "김민정",
+            "relation": "친구",
+            "photo": "blob:http://localhost:3000/0f812d7d-b5d8-4b25-9754-a574e6f7876b",
+            "file": [
+                {
+                    "url": "blob:http://localhost:3000/ae899d82-8920-4989-a8c9-0f653156a517",
+                    "type": "image/jpeg",
+                    "original": {}
+                }
+            ],
+            "thumbnail": {
+                "url": "blob:http://localhost:3000/ae899d82-8920-4989-a8c9-0f653156a517",
+                "type": "image/jpeg",
+                "original": {}
+            },
+            "thumbnailIdx": 0,
+            "extension": ["jpg"]
+        }
+    ]
+}

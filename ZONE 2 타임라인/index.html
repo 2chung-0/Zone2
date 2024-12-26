@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone2</title>
+    <style>
+        /* 기존 스타일 유지 */
+        @font-face {
+            font-family: 'YUniverse';
+            src: url('../글꼴/YUniverse-B.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Freesentation-5Medium';
+            src: url('../글꼴/Freesentation-5Medium');
+        }
+
+        @font-face {
+            font-family: 'Freesentation-4Regular';
+            src: url('../글꼴/Freesentation-4Regular.ttf');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            width: 1675px;
+            height: 2160px;
+            overflow: hidden;
+        }
+
+        .container {
+            font-size: 45px;
+            height: 2160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 1675px;
+            overflow: hidden;
+            padding: 120px;
+            color: white;
+            text-align: left;
+            line-height: 2.0;
+            transition: opacity 0.8s ease;
+        }
+
+        .title {
+            font-family: 'YUniverse', sans-serif;
+            font-size: 90px;
+            margin-bottom: 80px;
+        }
+
+        .text-section {
+            font-family: 'Freesentation-4Regular', sans-serif;
+            width: 100%;
+            margin-bottom: 120px;
+        }
+
+        .timeline-image {
+            width: 110%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+            margin-bottom: 120px;
+        }
+
+        .endText {
+            padding-top: 40px;
+            opacity: 0.7;
+        }
+
+        .ending-section {
+            font-family: 'Freesentation-4Regular', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">우은빈의 이야기</h1>
+        <div class="text-section">
+            우은빈은 서울에서 태어났다. 아버지의 직업은 은행원이었다. 그래서 초등학생 때 지점을 옮김에 따라 대구 초등학교도 다녔다. 그의 가족은 부모님과 친오빠로 구성되어 있다. 우은빈은 10년간 승무원으로 근무하며 많은 경험을 쌓았고, 이 경험을 바탕으로 승무원 면접 꿀팁을 유튜브에서 공유했다. 머리를 다친 이후에는 머리뼈가 찌그러진 모습을 다 공개하며 현재는 브이로그 콘텐츠를 제작하는 유튜브 크리에이터로 활동 중이다. 
+        </div>
+
+        <img src="../우은빈/zone2_timeline_0.svg" alt="타임라인" class="timeline-image">
+
+        <div class="ending-section">
+            그는 글쓰기를 통해 자신의 경험을 기록하는 것을 자랑스럽게 여긴다. 환자일 때도 명칭 실어증으로 매일 단어를 기억하지 못해서(괄호)를 치면서 어떻게든 글을 썼다. 언어장애, 실어증을 극복하기 위해 책 읽기를 즐기는데 특히 쉽게 읽히는 도서를 선호한다.
+            <div class="endText">
+                [The Life Gallery: 우은빈전]을 통해 우리는 한 사람의 용기 있는 발걸음을 만납니다. 그녀가 앞으로도 자신만의 이야기를 당당히 써내려갈 수 있기를, 그리고 그 여정에 더 많은 이들의 응원과 지지가 함께하기를 바랍니다.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 클라이언트 ID와 사용자 매핑
+        const clientMapping = {
+            'c6b8': 4, // 정임숙
+            '4de9': 1, // 우은빈
+            '7e0e': 3, // 임유빈
+            '3af9': 2  // 이애자
+        };
+
+        function updatePage(version) {
+            const container = document.querySelector('.container');
+            const title = document.querySelector('.title');
+            const currentTitle = title.textContent;
+            const currentVersion = currentTitle.includes('우은빈') ? 1 : 
+                                 currentTitle.includes('이애자') ? 2 :
+                                 currentTitle.includes('임유빈') ? 3 : 4;
+            
+            if (currentVersion === version) return;
+
+            const textSection = document.querySelector('.text-section');
+            const timelineImage = document.querySelector('.timeline-image');
+            const endingSection = document.querySelector('.ending-section');
+
+            container.style.opacity = 0;
+
+            setTimeout(() => {
+                if (version === 1) {
+                    title.textContent = '우은빈의 이야기';
+                    textSection.innerHTML = '우은빈은 서울에서 태어났다. 아버지의 직업은 은행원이었다. 그래서 초등학생 때 지점을 옮김에 따라 대구 초등학교도 다녔다. 그의 가족은 부모님과 친오빠로 구성되어 있다. 우은빈은 10년간 승무원으로 근무하며 많은 경험을 쌓았고, 이 경험을 바탕으로 승무원 면접 꿀팁을 유튜브에서 공유했다. 머리를 다친 이후에는 머리뼈가 찌그러진 모습을 다 공개하며 현재는 브이로그 콘텐츠를 제작하는 유튜브 크리에이터로 활동 중이다.';
+                    timelineImage.src = '../우은빈/zone2_timeline_0.svg';
+                    endingSection.innerHTML = `
+                        그는 글쓰기를 통해 자신의 경험을 기록하는 것을 자랑스럽게 여긴다. 환자일 때도 명칭 실어증으로 매일 단어를 기억하지 못해서(괄호)를 치면서 어떻게든 글을 썼다. 언어장애, 실어증을 극복하기 위해 책 읽기를 즐기는데 특히 쉽게 읽히는 도서를 선호한다.
+                        <div class="endText">
+                            [The Life Gallery: 우은빈전]을 통해 우리는 한 사람의 용기 있는 발걸음을 만납니다. 그녀가 앞으로도 자신만의 이야기를 당당히 써내려갈 수 있기를, 그리고 그 여정에 더 많은 이들의 응원과 지지가 함께하기를 바랍니다.
+                        </div>`;
+                } else if (version === 2) {
+                    title.textContent = '이애자의 이야기';
+                    textSection.innerHTML = '이애자님은 서울에서 7남매 중 장녀로 태어나셨습니다. 젊은 시절, 유명한 디자이너 앙드레 김과 함께 의상을 배우며 의상실을 운영하셨습니다. 이애자님은 세 자녀를 키우며 가정을 꾸리는 것을 자신의 삶에서 가장 큰 업적으로 여기십니다. 또한, 아들이 유학을 간 후 남겨진 통기타를 계기로 시니어 통기타반에서 반장으로 활동하며 20년간 봉사하셨고, 80세가 넘도록 활동을 이어가셨습니다. 이애자님은 동양화와 한국 무용을 오랫동안 취미로 즐기셨습니다.';
+                    timelineImage.src = '../이애자/zone2_timeline_0.svg';
+                    endingSection.innerHTML = `
+                        <div class="endText">
+                            [The Life Gallery: 이애자전]을 통해 우리는 한 여인의 아름다운 생애를 만납니다. 그녀가 걸어온 길이 우리 모두에게 깊은 감동과 따뜻한 위로가 되기를 바랍니다. 앞으로도 이어질 그녀의 예술과 사랑의 여정에 축복이 가득하기를 기원합니다.
+                        </div>`;
+                } else if (version === 3) {
+                    title.textContent = '임유빈의 이야기';
+                    textSection.innerHTML = '임유빈님은 성남시에서 태어나셨고, 부모님과 여동생 한 명이 있는 네 가족입니다. 현재 서강대학교에서 경제학과 신문방송학을 전공하고 있으며, 4학년 1학기를 마친 상태입니다. 학업적으로는 1학년 때 성적 상위 1% 상을 수상하는 등 우수한 성적을 거두었고, 학교 응원단 활동에도 열심히 참여하며 학교 생활을 즐겼습니다. 여가 시간에는 야구와 축구 경기를 직접 관람하거나 집에서 시청하는 것을 좋아합니다. 또한, 한식을 좋아하고 음악은 장르를 가리지 않고 다양하게 즐깁니다.';
+                    timelineImage.src = '../임유빈/zone2_timeline_0.svg';
+                    endingSection.innerHTML = `
+                        <div class="endText">
+                            [The Life Gallery: 임유빈전]을 통해 그동안의 순간들을 되돌아보며, 앞으로 펼쳐질 그의 미래를 함께 응원하고자 합니다. 이곳에 모인 우리의 마음이 그의 앞날에 든든한 날개가 되어주길 바랍니다.
+                        </div>`;
+                } else if (version === 4) {
+                    title.textContent = '정임숙의 이야기';
+                    textSection.innerHTML = '정임숙 님은 1973년 서울에서 태어났습니다. 가족으로는 엄마와 두 오빠, 한 여동생이 있으며, 아내이자 엄마로서 가족을 돌보는 중요한 역할을 하고 있습니다. 2016년부터 약국에서 파트타이머로 일하고 있습니다. 삶에서 큰 자부심을 가지고 있는 것은 가족을 돌보는 역할입니다. 취미로는 산책을 즐기며, 좋아하는 음식은 잡채이고, 발라드 음악을 즐겨 듣습니다.';
+                    timelineImage.src = '../정임숙/zone2_timeline_0.svg';
+                    endingSection.innerHTML = `
+                        <div class="endText">
+                            [The Life Gallery: 정임숙전]을 통해 우리는 평범하지만 특별한 한 여인의 삶을 만납니다. 가족을 향한 사랑으로 빛나는 그녀의 일상이 더욱 풍요롭고 행복하기를 기원합니다. 앞으로도 그녀의 따뜻한 마음이 더 많은 이들에게 전해지길 바랍니다.
+                        </div>`;
+                }
+                container.style.opacity = 1;
+            }, 800);
+        }
+
+        // WebSocket 연결 설정
+        const ws = new WebSocket("wss://ws.thelifegalleryvideo.com");
+        
+        ws.onopen = () => {
+            console.log("WebSocket 연결됨");
+            // 현재 클라이언트의 ID를 확인하고 해당하는 버전으로 업데이트
+            const currentClientId = window.location.hash.substring(1) || 'default';
+            const version = clientMapping[currentClientId] || 1;
+            
+            ws.send(JSON.stringify({
+                action: "setId",
+                clientId: currentClientId
+            }));
+            
+            updatePage(version);
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket 연결이 종료되었습니다");
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            //console.log("서버로부터 수신:", data);
+
+            if (data.action === "sync" && data.currentSelection.clientId) {
+                const version = clientMapping[data.currentSelection.clientId];
+                if (version) {
+                    updatePage(version);
+                }
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error("WebSocket 에러:", error);
+        };
+
+        // 시간 기반 업데이트를 위한 함수
+        function getCurrentScheduledVersion() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const time = hours * 100 + minutes;
+
+            const schedule = [
+                { start: 1200, end: 1230, version: 1 },
+                { start: 1230, end: 1300, version: 2 },
+                { start: 1300, end: 1330, version: 3 },
+                { start: 1330, end: 1400, version: 4 },
+                { start: 1400, end: 1430, version: 1 },
+                { start: 1430, end: 1500, version: 2 },
+                { start: 1500, end: 1530, version: 3 },
+                { start: 1530, end: 1600, version: 4 },
+                { start: 1600, end: 1630, version: 1 },
+                { start: 1630, end: 1700, version: 2 },
+                { start: 1700, end: 1730, version: 3 },
+                { start: 1730, end: 1800, version: 4 },
+                { start: 1800, end: 1830, version: 1 },
+                { start: 1830, end: 1900, version: 2 }
+            ];
+
+            const currentSlot = schedule.find(slot => time >= slot.start && time < slot.end);
+            return currentSlot ? currentSlot.version : 1;
+        }
+
+        // 시간 기반 업데이트 스케줄링
+        function scheduleNextUpdate() {
+            const now = new Date();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            
+            const nextMinutes = minutes >= 30 ? 60 : 30;
+            const msUntilNext = ((nextMinutes - minutes) * 60 - seconds) * 1000;
+            
+            setTimeout(() => {
+                updatePage(getCurrentScheduledVersion());
+                scheduleNextUpdate();
+            }, msUntilNext);
+        }
+
+        // 초기 페이지 설정 및 업데이트 스케줄링
+        updatePage(getCurrentScheduledVersion());
+        scheduleNextUpdate();
+    </script>
+</body>
+</html>
